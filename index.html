@@ -1,0 +1,219 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <title>Nokia 1100</title>
+    <style>
+        :root {
+            --border: rgba(158, 168, 138, 0);
+            --blur: blur(0px);
+            --accent: #9ba986;
+        }
+
+        body, html {
+            cursor: defaut url(http://www.rw-designer.com/cursor-extern.php?id=215261);
+            margin: 0; padding: 0; height: 100vh; width: 100vw;
+            font-family: 'Cascadia Code Light', system-ui, -apple-system;
+            background: url('https://t4.ftcdn.net/jpg/04/44/58/49/360_F_444584990_Axqc8EmJaObL2xzCHmkFgnnEjyaU7A5C.jpg') center/cover repeat;
+            overflow: hidden; color: white;
+        }
+
+        /* --- TOP STATUS BAR (Concept Reference) --- */
+        .top-container {
+            position: fixed; bottom: 12px; left: 15px; right: 15px;
+            display: flex; justify-content: space-between; align-items: center;
+            pointer-events: none; z-index: 1000;
+        }
+
+        .status-pill {
+            background: var(--glass); backdrop-filter: var(--blur);
+            border: 1px solid var(--border); border-radius: 0px;
+            padding: 6px 14px; font-size: 13px; display: flex; align-items: center; gap: 8px;
+            pointer-events: auto;
+        }
+
+        .top-search {
+            background: var(--glass); backdrop-filter: var(--blur);
+            border: 1px solid var(--border); border-radius: 0px;
+            padding: 7px 20px; width: 280px; text-align: center;
+            font-size: 13px; opacity: 0.7; pointer-events: auto;
+        }
+
+        /* --- LARGE CLOCK WIDGET (Concept Reference) --- */
+        .desktop-clock {
+            position: absolute; top: 100px; left: 60px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease-out;
+        }
+        .clock-time { font-size: 110px; font-weight: 200; line-height: 1; letter-spacing: -2px; }
+        .clock-date { font-size: 22px; opacity: 0.9; margin-left: 8px; font-weight: 400; }
+
+        /* --- FLOATING ISLAND TASKBAR (Concept Reference) --- */
+        .taskbar-wrapper {
+            position: fixed; bottom: -1px; left: 0; right: 0;
+            display: flex; justify-content: center; align-items: flex-end;
+            gap: 0px; pointer-events: none; z-index: 9999;
+        }
+
+        .island {
+            background: var(--glass-thick); backdrop-filter: var(--blur);
+            border: 1px solid var(--border); border-radius: 0px;
+            padding: 6px; display: flex; align-items: center; gap: 4px;
+            pointer-events: auto;
+        }
+
+        .app-btn {
+            width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+            border-radius: 0px; cursor: pointer; transition: 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+        }
+        .app-btn:hover { background: rgba(255,255,255,0.1); transform: translateY(-5px); }
+        .app-btn img { width: 32px; height: 32px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2)); }
+
+        /* --- START MENU (concept: Snipaste_2025-07-12) --- */
+        #startMenu {
+            position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%) translateY(30px);
+            width: 1200px; height: 250px;
+            background: rgba(25, 25, 25, 0.75); backdrop-filter: var(--blur);
+            border: 1px solid var(--border); border-radius: 0px;
+            opacity: 0; visibility: hidden; padding: 90px;
+        }
+        #startMenu.active { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+        .pinned-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; text-align: center; }
+        .pinned-item { cursor: pointer; transition: 8s; }
+        .pinned-item:hover { transform: scale(300); }
+        .pinned-item img { width: 44px; margin-bottom: 8px; }
+        .pinned-item span { font-size: 11px; display: block; }
+
+        /* --- ADVANCED WINDOWS --- */
+        .window {
+            position: absolute; background: var(--glass); backdrop-filter: var(--blur);
+            border: 1px solid var(--border); border-radius: 0px;
+            overflow: hidden; min-width: 400px; min-height: 300px; z-index: 100;
+        }
+        .win-header { padding: 12px 18px; display: flex; justify-content: space-between; cursor: move; }
+        .win-body { flex: 1; padding: 25px; }
+        .dot { width: 12px; height: 12px; border-radius: 0%; cursor: pointer; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body onclick="closeStart()">
+
+    <div class="top-container">
+        <div class="status-pill">Infinty°C</div>
+        <div class="status-pill" id="tray-time">There Is : No Time PM</div>
+    </div>
+
+  
+
+    
+
+    <div class="taskbar-wrapper">
+        <div class="island"> <div class="app-btn" onclick="toggleStart(event)">
+                <img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg">
+            </div>
+        </div>
+        <div class="island"> <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn" onclick="openApp('settingsWin', event)"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+            <div class="app-btn"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"></div>
+        </div>
+        
+    </div>
+
+    <div id="startMenu" onclick="event.stopPropagation()">
+        <div class="pinned-grid">
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+            <div class="pinned-item" onclick="openApp('settingsWin', event)"><img src="https://4.imimg.com/data4/GY/RX/ANDROID-40083844/product-500x500.jpeg"><span>Nokia</span></div>
+        </div>
+    </div>
+
+    <script>
+        
+        let highestZ = 100;
+
+        function toggleStart(e) {
+            e.stopPropagation();
+            document.getElementById('startMenu').classList.toggle('active');
+        }
+
+        function closeStart() {
+            document.getElementById('startMenu').classList.remove('active');
+        }
+
+        function openApp(id, e) {
+            e.stopPropagation();
+            const win = document.getElementById(id);
+            win.style.display = 'flex';
+            highestZ++;
+            win.style.zIndex = highestZ;
+            closeStart();
+        }
+
+        function closeApp(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function dragStart(e, id) {
+            const win = document.getElementById(id);
+            highestZ++;
+            win.style.zIndex = highestZ;
+            let offX = e.clientX - win.offsetLeft;
+            let offY = e.clientY - win.offsetTop;
+
+            function doDrag(ev) {
+                win.style.left = (ev.clientX - offX) + 'px';
+                win.style.top = (ev.clientY - offY) + 'px';
+            }
+            function stopDrag() {
+                document.removeEventListener('mousemove', doDrag);
+                document.removeEventListener('mouseup', stopDrag);
+            }
+            document.addEventListener('mousemove', doDrag);
+            document.addEventListener('mouseup', stopDrag);
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('big-time').innerText = timeStr.split(' ')[0];
+            document.getElementById('tray-time').innerText = timeStr;
+            document.getElementById('big-date').innerText = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+
+</body></html>
